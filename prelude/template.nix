@@ -1,8 +1,8 @@
-{ lib, tikal, pkgs, ... }:
+{ lib, pkgs, test, xonsh, log, ... }:
 let
-  inherit (tikal.prelude.test) with-tests;
-  inherit (tikal.xonsh) xsh;
-  log' = tikal.prelude.log.add-context { path = ./template.nix; };
+  inherit (test) with-tests;
+  inherit (xonsh) xsh;
+  log' = log.add-context { path = ./template.nix; };
   to-args-string = args:
     let
       args-def = lib.concatStringsSep "," args;

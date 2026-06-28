@@ -19,6 +19,7 @@ in
     list = self.callPackage ./prelude/list.nix {};
     path = self.callPackage ./prelude/path.nix {};
     attrs = self.callPackage ./prelude/attrs.nix {};
+    xonsh = self.callPackage ./prelude/xonsh.nix {};
     template = self.callPackage ./prelude/template.nix {};
     #inherit (self.trace-lib) trace trace-value debug-print;
     #inherit (do-lib) do;

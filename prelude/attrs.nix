@@ -42,6 +42,7 @@ in
   test.with-tests
   {
     inherit size merge-disjoint map-attrs-with;
+    inherit (test) fold-attrs-recursive;
   }
   {
     tikal.prelude.attrs = {

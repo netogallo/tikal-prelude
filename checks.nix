@@ -1,4 +1,4 @@
-{ pkgs, lib, path, ...}:
+{ pkgs, lib, path, template, ...}:
 let
   eval-tests = name: module:
   let
@@ -9,7 +9,7 @@ let
   ;
   eval-modules-tests = lib.attrValues (
     lib.mapAttrs eval-tests {
-      inherit path;
+      inherit path template;
     }
   );
 
