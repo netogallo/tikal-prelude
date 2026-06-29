@@ -1,5 +1,6 @@
-{ lib, test, trace, ... }:
+{ lib, test, trace-lib, ... }:
 let
+  trace = trace-lib;
   size = attrs: lib.length (lib.attrNames attrs);
   merge-disjoint = a: b:
     let

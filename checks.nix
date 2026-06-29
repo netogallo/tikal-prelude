@@ -1,4 +1,18 @@
-{ pkgs, lib, path, template, ...}:
+{
+  pkgs,
+  lib,
+  attrs,
+  do-lib,
+  godel,
+  list,
+  match,
+  path,
+  python,
+  string,
+  template,
+  xonsh,
+  ...
+}:
 let
   eval-tests = name: module:
   let
@@ -9,7 +23,8 @@ let
   ;
   eval-modules-tests = lib.attrValues (
     lib.mapAttrs eval-tests {
-      inherit path template;
+      inherit attrs do-lib godel list match path
+        python string template xonsh;
     }
   );
 

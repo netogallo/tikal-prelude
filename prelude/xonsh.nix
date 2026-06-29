@@ -26,7 +26,7 @@ let
       ''
       #!${pkgs.bash}/bin/bash
       touch xonshrc
-      XONSHRC="$PWD/xonshrc" HOME="$PWD" RAISE_SUBPROC_ERROR=True XONSH_SHOW_TRACEBACK=True ${pythonpath-str} ${xonsh}/bin/xonsh "${script}" $@
+      XONSHRC="$PWD/xonshrc" HOME="$PWD" XONSH_SUBPROC_CMD_RAISE_ERROR=True XONSH_SHOW_TRACEBACK=True ${pythonpath-str} ${xonsh}/bin/xonsh "${script}" $@
 
       exit $?
       ''
