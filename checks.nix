@@ -11,6 +11,7 @@
   string,
   template,
   xonsh,
+  callPackage,
   ...
 }:
 let
@@ -25,6 +26,7 @@ let
     lib.mapAttrs eval-tests {
       inherit attrs do-lib godel list match path
         python string template xonsh;
+      match-extra = callPackage ./checks/match-extra.nix {};
     }
   );
 

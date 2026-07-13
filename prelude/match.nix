@@ -20,7 +20,7 @@ let
       ;
     in
       if lib.length (lib.attrNames fn-args-spec) > 0
-      then builtins.tryEval (fn args)
+      then builtins.tryEval (fn fn-args)
       else throw ''
         Invalid expresion found on match statement. All match
         functions must have explicit attributes as parameters.
