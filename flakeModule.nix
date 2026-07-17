@@ -7,6 +7,10 @@ let
     mkOption
     types;
   config' = config;
+  tikal-config = {
+    log-level = 8;
+    test-filters = [ { glob = "*"; } ];
+  };
 in
 {
   config = {
@@ -19,6 +23,16 @@ in
         tikal.prelude = prelude;
       }
     ;
+    flake.lib =
+    let
+      lib-scope =
+        lib.makeScope lib.callPackagesWith (self: {
+          inherit lib nixpkgs tikal-config;
+          prelude = self.callPackage ./prelude-lib.nix {};
+        });
+    in
+      lib-scope.prelude
+    ;
   };
   options = {
 
@@ -28,6 +42,9 @@ in
     in
       {
         checks.tikal-prelude = tikal.prelude.checks.all;
+        checks.tiakl-prelude-lib = self.lib.log.log-info "success" (
+          pkgs.writeText "test" "test"
+        );
       }
     );
   };
