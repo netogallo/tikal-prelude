@@ -19,6 +19,8 @@ let
     attrs = self.callPackage ./prelude/attrs.nix {};
     inherit (self.trace-lib) trace trace-value debug-print;
     inherit (self.do-lib) do;
+    inherit (self.main) store-path-to-key drop-store-prefix is-prefix
+      partition fold-attrs-recursive;
   });
 in
   prelude
