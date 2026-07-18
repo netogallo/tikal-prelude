@@ -53,6 +53,9 @@ in
     ;
   };
   options = {
+    flake.lib.tikal.prelude = lib.mkOption {
+      type = types.attrs;
+    };
     tikal = {
       log-level = lib.mkOption {
         description = ''
