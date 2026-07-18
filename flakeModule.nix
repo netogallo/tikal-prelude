@@ -36,8 +36,8 @@ let
 in
 {
   config = {
-    flake.overlays.default = overlay;
-    flake.overlays.debug = overlay.override { tikal-config = tikal-config-debug; };
+    flake.overlays.tikal-prelude = overlay;
+    flake.overlays.tikal-prelude-debug = overlay.override { tikal-config = tikal-config-debug; };
     flake.lib =
     let
       lib-scope =
@@ -47,7 +47,9 @@ in
           prelude = self.callPackage ./prelude-lib.nix {};
         });
     in
-      lib-scope.prelude
+      {
+        tikal.prelude = lib-scope.prelude;
+      }
     ;
   };
   options = {
@@ -81,7 +83,7 @@ in
 
     perSystem = mkPerSystemOption ({ pkgs, system, config, ... }:
     let
-      inherit (pkgs.extend self.overlays.debug) tikal;
+      inherit (pkgs.extend self.overlays.tikal-prelude-debug) tikal;
     in
       {
         checks.tikal-prelude = tikal.prelude.checks.all;
@@ -90,7 +92,7 @@ in
         # All of the lib's functionality is checked by the
         # overlay test.
         checks.tikal-prelude-lib =
-          self.lib.log.log-info "The lib is well defined" (
+          self.lib.tikal.prelude.log.log-info "The lib is well defined" (
             pkgs.writeText "The lib is well defined" ""
           )
         ;
