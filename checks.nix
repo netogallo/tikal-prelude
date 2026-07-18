@@ -27,6 +27,7 @@ let
       inherit attrs do-lib godel list match path
         python string template xonsh;
       match-extra = callPackage ./checks/match-extra.nix {};
+      path-extra = callPackage ./checks/path-extra.nix {};
     }
   );
 

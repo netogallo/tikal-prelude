@@ -1,4 +1,4 @@
-{ pkgs, lib, test, trace-lib, string }:
+{ lib, test, trace-lib, string }:
 let
   inherit (trace-lib) debug-print;
   inherit (lib) lists strings;
@@ -50,13 +50,6 @@ in
         "it throws error if the extension doesn't match" = { _assert, ... }: _assert.all [
           (_assert.throws (extension-of-checked [ "jpg" "exe" ] "file.exe.not"))
           (_assert.throws (extension-of-checked [ "jpg" "exe" ] "file.notexe"))
-        ];
-      };
-
-      is-file-reference = {
-        "it is a reference to a file" = { _assert, ... }: _assert.all [
-          (_assert.true (is-file-reference ./path.nix))
-          (_assert.true (is-file-reference (pkgs.writeText "test" "test")))
         ];
       };
     };
