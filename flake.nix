@@ -7,7 +7,7 @@
   };
 
   outputs = inputs@{ flake-parts, nixpkgs, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } {
+    flake-parts.lib.mkFlake { inherit inputs; } ({ flake-parts-lib, ... }: {
       imports = [
         ./flakeModule.nix
         # To import an internal flake module: ./other.nix
@@ -28,7 +28,7 @@
         # The usual flake attributes can be defined here, including system-
         # agnostic ones like nixosModule and system-enumerating ones, although
         # those are more easily expressed in perSystem.
-
+        flakeModules.default = ./flakeModule.nix;
       };
-    };
+    });
 }
